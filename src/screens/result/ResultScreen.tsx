@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { FlatList, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Platform, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../library/intex';
 import { ResultBackground } from './components/ResultBackground';
@@ -42,6 +42,7 @@ export const ResultScreen = () => {
 
       <SafeAreaView>
         <Button
+          style={Platform.OS === 'android' && { marginBottom: 20 }}
           caption={'Play Again'}
           gradient={['#FFA67A', '#FF6065']}
           gradientShadow={'#C65252'}

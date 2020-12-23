@@ -36,9 +36,7 @@ export const Button = ({
     captionStyles.push(styles.captionPrimaryLight);
   }
 
-  if (style) {
-    buttonStyles.push(style);
-  }
+
   if (captionStyle) {
     captionStyles.push(captionStyle);
   }
@@ -48,7 +46,7 @@ export const Button = ({
       accessibilityRole="button"
       activeOpacity={0.5}
       onPress={onPress}
-      style={styles.container}
+      style={[styles.container, style]}
     >
 
       { gradient
@@ -92,10 +90,9 @@ const styles = StyleSheet.create({
 
   shadow: {
     backgroundColor: Colors.primaryDark,
-    borderBottomEndRadius: 14,
-    borderBottomStartRadius: 14,
-    marginTop: -15,
-    height: 19,
+    borderRadius: 14,
+    marginTop: -64,
+    height: 70,
     zIndex:1
   },
 

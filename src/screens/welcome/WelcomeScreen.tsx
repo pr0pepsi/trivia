@@ -76,6 +76,8 @@ export const WelcomeScreen = () => {
 
       <SafeAreaView>
         <Button
+          style={Platform.OS === 'android' && { marginBottom: 20 }}
+
           caption={'Play'}
           gradient={['#FFA67A', '#FF6065']}
           gradientShadow={'#C65252'}
