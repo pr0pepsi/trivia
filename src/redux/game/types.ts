@@ -8,7 +8,8 @@ export interface Question {
 }
 
 export interface GameState {
-    questions: Question[]
+    questions: Question[],
+    results: Boolean[]
 }
 
 export const SET_QUESTIONS = 'SET_QUESTIONS'
@@ -20,5 +21,14 @@ interface SetQuestionsAction {
     }
 }
 
+export const ADD_QUESTION_RESULT = 'ADD_QUESTION_RESULT'
 
-export type GameActionTypes = SetQuestionsAction;
+interface AddQuestionResultAction {
+    type: typeof ADD_QUESTION_RESULT;
+    payload: {
+        result: boolean,
+    }
+}
+
+
+export type GameActionTypes = SetQuestionsAction | AddQuestionResultAction;

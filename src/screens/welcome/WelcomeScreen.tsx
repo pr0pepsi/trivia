@@ -17,7 +17,7 @@ import { WelcomeBackground } from './components/WelcomeBackground';
 export const WelcomeScreen = () => {
 
   const [difficulty, setDifficulty] = useState('easy');
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(5);
 
   const dispatch = useDispatch();
   const navigator = useNavigation();

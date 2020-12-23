@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Colors } from '../../library/intex';
 import { StoreState } from '../../redux/intex';
 import { AnswerSection } from './components/AnswerSection';
@@ -8,19 +8,23 @@ import { ProgressBackground } from './components/ProgressBackground';
 import { ProgressBar } from './components/ProgressBar';
 
 import { useNavigation } from '@react-navigation/native';
+import { ExitSvg } from '../../library/assets/svg/ExitSvg';
+import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
+import { addQuestionResult } from '../../redux/game/actions';
 
 export const ProgressScreen = () => {
 
   const questions = useSelector((state: StoreState) => state.game.questions);
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
+  const dispatch = useDispatch();
   const navigator = useNavigation();
 
   const selectAnswer = (answer: string) => {
 
-    if (answer === questions[currentQuestion].correct_answer) {
-      console.log('win')
-    }
+    const result = (answer === questions[currentQuestion].correct_answer);
+
+    dispatch(addQuestionResult(result));
 
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion === questions.length) {
@@ -48,7 +52,6 @@ export const ProgressScreen = () => {
 
           <Text style={styles.questionText}>{questions[currentQuestion].question}</Text>
 
-
           <AnswerSection
             style={{ marginTop: 50 }}
             onSelect={selectAnswer}
@@ -67,11 +70,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  exitButton: {
+    marginTop: 40,
+    position: 'absolute',
+
+    // zIndex: 99,
+    // position: 'absolute',
+    // right: 0,
+    // top: 60,
+  },
 
   headerContainer: {
     alignItems: 'center',
     marginTop: 120,
-    height: 100
+    minHeight: 120
   },
 
   headerText: {

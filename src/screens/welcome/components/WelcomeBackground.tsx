@@ -15,10 +15,10 @@ export const WelcomeBackground = ({ children }: WelcomeBackgroundProps) => {
     return (
         <View style={styles.background}>
             {children}
-            <BGW1Svg style={styles.element1} />
-            <BGW2Svg style={styles.element2} />
-            <BGW3Svg style={styles.element3} />
-            <BGW4Svg style={styles.element4} />
+            <BGW1Svg style={[styles.svg, styles.topLeft]} />
+            <BGW2Svg style={[styles.svg, styles.topRight]} />
+            <BGW3Svg style={[styles.svg, styles.bottomRight]} />
+            <BGW4Svg style={[styles.svg, styles.bottomLeft]} />
         </View>
     );
 };
@@ -29,27 +29,23 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
         paddingHorizontal: 30
     },
-    element1: {
+    svg: {
         zIndex: -1,
         position: 'absolute',
+    },
+    topLeft: {
         left: 0,
         top: 0,
     },
-    element2: {
-        zIndex: -1,
-        position: 'absolute',
+    topRight: {
         right: 0,
         top: 0
     },
-    element3: {
-        zIndex: -1,
-        position: 'absolute',
+    bottomRight: {
         right: 0,
         bottom: 0
     },
-    element4: {
-        zIndex: -1,
-        position: 'absolute',
+    bottomLeft: {
         left: 0,
         bottom: 0,
     }

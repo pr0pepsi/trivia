@@ -1,7 +1,8 @@
 import { GameActionTypes, GameState } from "./types"
 
 const initialState: GameState = {
-    questions: []
+    questions: [],
+    results: []
 }
 
 export function gameReducer(
@@ -11,8 +12,14 @@ export function gameReducer(
     switch (action.type) {
         case 'SET_QUESTIONS':
             return { 
-                ...state, 
+                ...state,
+                results: [],
                 questions: action.payload.questions
+            };
+        case 'ADD_QUESTION_RESULT':
+            return {
+                ...state,
+                results: [...state.results, action.payload.result]
             };
         default:
             return state

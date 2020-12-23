@@ -5,6 +5,8 @@ import { BGP1Svg } from '../assets/svg/BGP1Svg';
 import { BGP2Svg } from '../assets/svg/BGP2Svg';
 import { BGP3Svg } from '../assets/svg/BGP3Svg';
 import { BGP4Svg } from '../assets/svg/BGP4Svg';
+import { BGP5Svg } from '../assets/svg/BGP5Svg';
+import { BGP6Svg } from '../assets/svg/BGP6Svg';
 
 
 export interface ProgressBackgroundProps {
@@ -16,10 +18,14 @@ export const ProgressBackground = ({ children }: ProgressBackgroundProps) => {
     return (
         <View style={styles.background}>
             {children}
-            <BGP1Svg style={styles.element1} />
-            <BGP2Svg style={styles.element2} />
-            <BGP3Svg style={styles.element3} />
-            <BGP4Svg style={styles.element4} />
+            <BGP1Svg style={[styles.svg, styles.topLeft]} />
+            <BGP2Svg style={[styles.svg, styles.topRight]} />
+            <BGP3Svg style={[styles.svg, styles.bottomRight]} />
+            <BGP4Svg style={[styles.svg, styles.bottomRight]} />
+            <BGP5Svg style={[styles.svg, styles.bottomLeft]} />
+            <BGP6Svg style={[styles.svg, styles.bottomLeft, { zIndex: -2 }]} />
+
+
         </View>
     );
 };
@@ -30,27 +36,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         paddingHorizontal: 30
     },
-    element1: {
+    svg: {
         zIndex: -1,
         position: 'absolute',
+    },
+    topLeft: {
         left: 0,
         top: 0,
     },
-    element2: {
-        zIndex: -1,
-        position: 'absolute',
+    topRight: {
         right: 0,
         top: 0
     },
-    element3: {
-        zIndex: -1,
-        position: 'absolute',
+    bottomRight: {
         right: 0,
         bottom: 0
     },
-    element4: {
-        zIndex: -1,
-        position: 'absolute',
+    bottomLeft: {
         left: 0,
         bottom: 0,
     }
