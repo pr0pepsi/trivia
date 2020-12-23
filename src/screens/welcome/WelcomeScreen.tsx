@@ -76,7 +76,7 @@ export const WelcomeScreen = () => {
 
       <SafeAreaView>
         <Button
-          caption={'True'}
+          caption={'Play'}
           gradient={['#FFA67A', '#FF6065']}
           gradientShadow={'#C65252'}
           primary

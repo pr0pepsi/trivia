@@ -28,9 +28,7 @@ export const ProgressScreen = () => {
 
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion === questions.length) {
-      // navigator.navigate('result');
-      navigator.navigate('welcome');
-
+      navigator.navigate('result');
       return;
     }
 
