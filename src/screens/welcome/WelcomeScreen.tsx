@@ -6,27 +6,24 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { Button, Input } from '../../library/intex';
+import { Button, Colors, Input } from '../../library/intex';
 import { setQuestions } from '../../redux/game/actions';
 import { Question } from '../../redux/game/types';
 import { CupSvg } from './assets/svg/CupSvg';
 import { LogoSvg } from './assets/svg/LogoSvg';
 import { StarSvg } from './assets/svg/StarSvg';
+import { WelcomeBackground } from './components/WelcomeBackground';
 
 export const WelcomeScreen = () => {
 
   const [difficulty, setDifficulty] = useState('easy');
-  const [amount, setAmount] = useState(10);
+  const [amount, setAmount] = useState(100);
 
   const dispatch = useDispatch();
   const navigator = useNavigation();
 
-  useEffect(() => {
-    // setupGame('easy', 10);
-  }, []);
-
   const setupGame = async () => {
-    const result: Question[] = await getQuestionsFromApi('easy', 10);
+    const result: Question[] = await getQuestionsFromApi(difficulty, amount);
     await dispatch(setQuestions(result));
     navigator.navigate('progress');
   }
@@ -45,15 +42,15 @@ export const WelcomeScreen = () => {
 
 
   return (
-    <View style={styles.background}>
+    <WelcomeBackground>
       <KeyboardAvoidingView
-        style={styles.content}
+        style={{ flex: 1 }}
         behavior="padding"
         enabled>
         <ScrollView
           style={{ flex: 1 }}
           showsVerticalScrollIndicator={false}>
-          <SafeAreaView style={styles.container}>
+          <View style={styles.container}>
 
             <View style={styles.headerContainer}>
               <Text style={styles.headerText}>Welcome to the</Text>
@@ -73,39 +70,31 @@ export const WelcomeScreen = () => {
               textLabel={'Amount'}
               imageLabel={<StarSvg />}
             />
-          </SafeAreaView>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
 
       <SafeAreaView>
         <Button
           caption={'True'}
-          gradient
+          gradient={['#FFA67A', '#FF6065']}
+          gradientShadow={'#C65252'}
           primary
           onPress={setupGame} />
       </SafeAreaView>
-    </View>
+    </WelcomeBackground>
 
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    backgroundColor: '#4953BE',
-    paddingHorizontal: 30
-  },
   container: {
     flex: 1,
     alignItems: 'center',
   },
 
   headerContainer: {
-    marginTop: 80
-  },
-
-  content: {
-    flex: 1,
+    marginTop: 120
   },
 
   headerText: {
@@ -117,6 +106,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     textAlign: 'center',
     color: 'white'
-  }
-
+  },
 });

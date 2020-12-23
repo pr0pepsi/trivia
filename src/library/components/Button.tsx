@@ -1,10 +1,13 @@
 import React from 'react';
 import { Text, Image, TouchableOpacity, StyleSheet, ViewStyle, TextStyle, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
+import { Colors } from '../styles';
 
 export interface ButtonProps {
   caption: string;
-  gradient?: boolean;
+  /* colors */
+  gradient?: string[];
+  gradientShadow?: string;
   primary?: boolean;
   primaryLight?: boolean;
   onPress: (e?: any) => void;
@@ -19,7 +22,8 @@ export const Button = ({
   primaryLight,
   style,
   captionStyle,
-  gradient
+  gradient,
+  gradientShadow
 }: ButtonProps) => {
   const buttonStyles: ViewStyle[] = [styles.button];
   const captionStyles: TextStyle[] = [styles.caption];
@@ -32,13 +36,12 @@ export const Button = ({
     captionStyles.push(styles.captionPrimaryLight);
   }
 
-  // if (style) {
-  //   buttonStyles.push(style);
-  // }
-  // if (captionStyle) {
-  //   captionStyles.push(captionStyle);
-  // }
-
+  if (style) {
+    buttonStyles.push(style);
+  }
+  if (captionStyle) {
+    captionStyles.push(captionStyle);
+  }
 
   return (
     <TouchableOpacity
@@ -50,7 +53,7 @@ export const Button = ({
 
       { gradient
         ? <LinearGradient
-          colors={['#FFA67A', '#FF6065']}
+          colors={gradient}
           style={buttonStyles}
           start={{ x: 0, y: 0.5 }}
           end={{ x: 1, y: 0.5 }}>
@@ -61,7 +64,7 @@ export const Button = ({
           </View>}
 
       
-      {primary && <View style={[styles.shadow, gradient && styles.gradientShadow]}/>}
+      {primary && <View style={[styles.shadow, gradient && { backgroundColor: gradientShadow }]} />}
     </TouchableOpacity>
   );
 };
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
   },
 
   shadow: {
-    backgroundColor: '#424A9E',
+    backgroundColor: Colors.primaryDark,
     borderBottomEndRadius: 14,
     borderBottomStartRadius: 14,
     marginTop: -15,
@@ -96,16 +99,12 @@ const styles = StyleSheet.create({
     zIndex:1
   },
 
-  gradientShadow: {
-    backgroundColor: '#C65252',
-  },
-
   backgroundPrimary: {
-    backgroundColor: '#4953BE',
+    backgroundColor: Colors.primary,
   },
   backgroundPrimaryLight: {
     backgroundColor: '#ffffff',
-    borderColor: '#4953BE',
+    borderColor: Colors.primary,
     borderWidth: 3
   },
 
