@@ -19,7 +19,7 @@ export const WelcomeScreen = () => {
   const route = useRoute();
 
   const [difficulty, setDifficulty] = useState('easy');
-  const [amount, setAmount] = useState(5);
+  const [amount, setAmount] = useState(10);
 
   const dispatch = useDispatch();
   const navigator = useNavigation();
