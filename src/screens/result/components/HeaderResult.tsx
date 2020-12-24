@@ -2,6 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ViewStyle, Text } from 'react-native';
 import { Colors } from '../../../library/intex';
 import { AvatarSvg } from '../assets/svg/AvatarSvg';
+import { StarSvg } from '../assets/svg/StarSvg';
+
+const Stars = ({ percentage, style }: { percentage: number, style?: ViewStyle | ViewStyle[] }) => {
+    const amountStars = 10;
+    const activeStar = Math.round(percentage * amountStars / 100);
+
+    let stars = [];
+
+    for (let i = 0; i < amountStars; i++) {
+        stars.push(<StarSvg key={`star${i}`} color={i < activeStar ? Colors.secondary : undefined} />)
+    }
+
+    return (
+        <View style={[styles.starContainer, style]}>
+            {stars}
+        </View>
+    )
+}
 
 export interface HeaderResultProps {
     correct: number;
@@ -11,7 +29,9 @@ export interface HeaderResultProps {
 
 export const HeaderResult = ({ correct, length, style }: HeaderResultProps) => {
 
-    const percentage = (correct / length * 10);
+    const percentage = (correct / length * 100);
+
+
 
     return (
         <View style={[styles.container, style]}>
@@ -27,6 +47,7 @@ export const HeaderResult = ({ correct, length, style }: HeaderResultProps) => {
                     <Text style={styles.textLength}>{length}</Text>
                 </View>
             </View>
+            <Stars percentage={percentage} style={{ marginTop: 15 }} />
 
         </View>
     );
@@ -35,6 +56,9 @@ export const HeaderResult = ({ correct, length, style }: HeaderResultProps) => {
 const styles = StyleSheet.create({
     container: {},
     infoContainer: {
+        flexDirection: 'row'
+    },
+    starContainer: {
         flexDirection: 'row'
     },
     circle: {

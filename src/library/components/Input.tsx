@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useRef, useState} from 'react';
+import React, { } from 'react';
 import { TextInputProps } from 'react-native';
 import {
   StyleSheet,
@@ -7,18 +7,48 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { color } from 'react-native-reanimated';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ArrowDownSvg } from '../assets/svg/ArrowDownSvg';
 
 interface InputProps extends TextInputProps {
   value: string;
   setValue: Function;
   textLabel: string;
   imageLabel: any;
+  selectItem?: boolean;
+  onPress?: () => any;
   style?: ViewStyle | ViewStyle[];
 }
 
 export const Input = (props: InputProps) => {
-    const {textLabel,imageLabel,value,setValue,style, ...restProps } = props;
+  const { textLabel, imageLabel, value, setValue, style, selectItem, onPress, ...restProps } = props;
+
+  let item = <TextInput
+    onChangeText={(text) => setValue(text)}
+    value={value}
+    style={[styles.input, styles.text]}
+    {...restProps}
+  />
+
+  if (selectItem) {
+    item = (
+      <TouchableOpacity
+        accessibilityRole="button"
+        activeOpacity={0.8}
+        onPress={onPress}
+      >
+
+        <TextInput
+          onChangeText={(text) => setValue(text)}
+          value={value}
+          editable={false}
+          style={[styles.input, styles.text]}
+          {...restProps} />
+        <ArrowDownSvg style={styles.selectItem} />
+      </TouchableOpacity>
+
+    )
+  }
 
   return (
     <View style={[styles.container, style]}>
@@ -28,12 +58,9 @@ export const Input = (props: InputProps) => {
             </View>
             <Text style={[styles.text, styles.label]}>{textLabel}</Text>
         </View>
-        <TextInput
-          onChangeText={(text) => setValue(text)}
-          value={value}
-          style={[styles.input, styles.text]}
-          {...restProps}
-        />
+
+      {item}
+
     </View>
   );
 };
@@ -63,6 +90,7 @@ const styles = StyleSheet.create({
     height:54,
     textAlignVertical: 'center',
     borderColor: '#ffffff',
+    justifyContent: 'space-between'
   },
 
   text: {
@@ -73,6 +101,13 @@ const styles = StyleSheet.create({
     lineHeight: 19.5,
     textTransform: 'lowercase',
     color: '#ffffff',
+  },
+
+  selectItem: {
+    position: 'absolute',
+    right: 20,
+    top: 25,
+
   }
 
 });

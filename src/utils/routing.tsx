@@ -7,6 +7,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { ExitSvg } from '../library/assets/svg/ExitSvg';
 import { useNavigation } from '@react-navigation/native';
 import { Colors } from '../library/intex';
+import { SelectDifficultyScreen } from '../screens/welcome/SelectDifficultyScreen';
 
 
 const ExitButton = ({ color }: { color: string }) => {
@@ -34,6 +35,14 @@ export const Routing = () => {
       headerShown: false
     }}>
       <stack.Screen name="welcome" component={WelcomeScreen} />
+      <stack.Screen name="selectDifficulty"
+        component={SelectDifficultyScreen} options={{
+          headerShown: true,
+          title: '',
+          headerTransparent: true,
+          headerLeft: () => null,
+          headerRight: () => <ExitButton color={'#fff'} />,
+        }} />
       <stack.Screen name="progress"
         component={ProgressScreen}
         options={{

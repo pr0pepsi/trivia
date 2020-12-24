@@ -13,8 +13,6 @@ export const ResultItem = ({ question, isCorrect }: ResultItemProps) => {
 
     const backgroundColor = isCorrect ? '#FFFBFA' : '#FFDBDB'
 
-    console.log(question)
-
     return (
         <View style={[styles.container, { backgroundColor }]}>
             <Text style={styles.text}>{question}</Text>

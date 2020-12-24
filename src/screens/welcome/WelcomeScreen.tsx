@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { useRef } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
@@ -16,11 +16,20 @@ import { WelcomeBackground } from './components/WelcomeBackground';
 
 export const WelcomeScreen = () => {
 
+  const route = useRoute();
+
   const [difficulty, setDifficulty] = useState('easy');
   const [amount, setAmount] = useState(5);
 
   const dispatch = useDispatch();
   const navigator = useNavigation();
+
+  useEffect(() => {
+    const params: any = route.params;
+    if (params && params['difficulty']) {
+      setDifficulty(params['difficulty'])
+    }
+  }, [route.params])
 
   const setupGame = async () => {
     const result: Question[] = await getQuestionsFromApi(difficulty, amount);
@@ -45,7 +54,7 @@ export const WelcomeScreen = () => {
     <WelcomeBackground>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior="padding"
+        behavior={Platform.OS === 'ios' ? "padding" : undefined}
         enabled>
         <ScrollView
           style={{ flex: 1 }}
@@ -58,6 +67,8 @@ export const WelcomeScreen = () => {
             </View>
 
             <Input
+              selectItem
+              onPress={() => navigator.navigate('selectDifficulty', { difficulty })}
               value={difficulty}
               setValue={setDifficulty}
               textLabel={'Difficulty'}

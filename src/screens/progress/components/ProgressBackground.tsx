@@ -23,9 +23,7 @@ export const ProgressBackground = ({ children }: ProgressBackgroundProps) => {
             <BGP3Svg style={[styles.svg, styles.bottomRight]} />
             <BGP4Svg style={[styles.svg, styles.bottomRight]} />
             <BGP5Svg style={[styles.svg, styles.bottomLeft]} />
-            <BGP6Svg style={[styles.svg, styles.bottomLeft, { zIndex: -2 }]} />
-
-
+				<BGP6Svg style={[styles.svg, styles.bottomLeft, { zIndex: -2 }]} />
         </View>
     );
 };
