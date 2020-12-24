@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import Svg, {
   SvgProps,
   Path,
@@ -6,7 +6,7 @@ import Svg, {
   Pattern,
   Use,
   Image,
-} from "react-native-svg"
+} from "react-native-svg";
 
 export const LogoSvg = (props: SvgProps) => {
   return (
@@ -37,5 +37,5 @@ export const LogoSvg = (props: SvgProps) => {
         />
       </Defs>
     </Svg>
-  )
-}
+  );
+};

@@ -1,7 +1,7 @@
-export * from './styles'
+export * from "./styles";
 
 // components
-export * from './components/Button';
-export * from './components/Input';
+export * from "./components/Button";
+export * from "./components/Input";
 
 // svg

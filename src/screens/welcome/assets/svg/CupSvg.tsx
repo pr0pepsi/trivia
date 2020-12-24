@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import Svg, {
   SvgProps,
   Path,
@@ -6,17 +6,11 @@ import Svg, {
   Pattern,
   Use,
   Image,
-} from "react-native-svg"
+} from "react-native-svg";
 
 export const CupSvg = (props: SvgProps) => {
   return (
-    <Svg
-      width={24}
-      height={28}
-      viewBox="0 0 24 28"
-      fill="none"
-      {...props}
-    >
+    <Svg width={24} height={28} viewBox="0 0 24 28" fill="none" {...props}>
       <Path
         d="M8.563 14.322C1.276 10.902-.564 7.303.14 5.063c.569-1.777 2.619-2.628 5.237-2.15l-.344 1.911c-1.571-.283-2.798.06-3.038.837-.389 1.21 1.272 4.047 7.392 6.914l-.823 1.748zM15.432 14.323l-.823-1.763c6.12-2.867 7.78-5.704 7.392-6.914-.255-.777-1.467-1.105-3.038-.836l-.344-1.912c2.619-.463 4.668.388 5.237 2.15.718 2.256-1.122 5.855-8.424 9.275zM12.903 11.844h-1.796v10.035h1.796V11.843z"
         fill="#F7A491"
@@ -31,5 +25,5 @@ export const CupSvg = (props: SvgProps) => {
         fill="#FFFBFA"
       />
     </Svg>
-  )
-}
+  );
+};

@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import Svg, {
   SvgProps,
   Path,
@@ -6,17 +6,11 @@ import Svg, {
   Pattern,
   Use,
   Image,
-} from "react-native-svg"
+} from "react-native-svg";
 
 export const StarSvg = (props: SvgProps) => {
   return (
-    <Svg
-      width={25}
-      height={25}
-      viewBox="0 0 25 25"
-      fill="none"
-      {...props}
-    >
+    <Svg width={25} height={25} viewBox="0 0 25 25" fill="none" {...props}>
       <Path
         d="M12.5 25C19.404 25 25 19.404 25 12.5S19.404 0 12.5 0 0 5.596 0 12.5 5.596 25 12.5 25z"
         fill="#F7A491"
@@ -30,5 +24,5 @@ export const StarSvg = (props: SvgProps) => {
         fill="#fff"
       />
     </Svg>
-  )
-}
+  );
+};
