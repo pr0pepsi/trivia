@@ -36,7 +36,9 @@ export const Input = (props: InputProps) => {
         accessibilityRole="button"
         activeOpacity={0.8}
         onPress={onPress}
+        style={{ flex: 1, width: '100%' }}
       >
+        <View pointerEvents='none'>
 
         <TextInput
           onChangeText={(text) => setValue(text)}
@@ -45,6 +47,9 @@ export const Input = (props: InputProps) => {
           style={[styles.input, styles.text]}
           {...restProps} />
         <ArrowDownSvg style={styles.selectItem} />
+        </View>
+
+
       </TouchableOpacity>
 
     )
