@@ -8,6 +8,7 @@ import { ExitSvg } from "../library/assets/svg/ExitSvg";
 import { useNavigation } from "@react-navigation/native";
 import { Colors } from "../library/intex";
 import { SelectDifficultyScreen } from "../screens/welcome/SelectDifficultyScreen";
+import { TestScreen } from "../screens/test/TestScreen";
 
 const ExitButton = ({ color }: { color: string }) => {
   const navigation = useNavigation();
@@ -30,11 +31,23 @@ export const Routing = () => {
   return (
     <stack.Navigator
       headerMode="screen"
+      initialRouteName="test"
       screenOptions={{
         headerShown: false,
       }}
     >
       <stack.Screen name="welcome" component={WelcomeScreen} />
+      <stack.Screen
+        name="test"
+        component={TestScreen}
+        options={{
+          headerShown: true,
+          title: "",
+          headerTransparent: true,
+          headerLeft: () => null,
+          headerRight: () => <ExitButton color={"#fff"} />,
+        }}
+      />
       <stack.Screen
         name="selectDifficulty"
         component={SelectDifficultyScreen}
