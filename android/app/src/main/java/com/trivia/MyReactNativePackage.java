@@ -23,6 +23,7 @@ public class MyReactNativePackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new CalendarModule(reactContext));
+        modules.add(new BiometricModule(reactContext));
 
         return modules;
     }

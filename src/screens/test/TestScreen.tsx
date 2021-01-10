@@ -2,14 +2,23 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, NativeModules } from "react-native";
 import { Button, Colors, Input } from "../../library/intex";
+import { BiometricModule } from "../../library/native/BiometricModule";
 import { CalendarModule } from "../../library/native/CalendarModule";
 import { WelcomeBackground } from "../welcome/components/WelcomeBackground";
 
 export const TestScreen = () => {
   const navigator = useNavigation();
 
-  const nativeScanner = () => {
-    CalendarModule.scanner(()=> console.log('udalo sie'));
+  const biometricAuthentication = () => {
+    BiometricModule.scanner(
+      'You are logging into Trivia',
+      'Confirm that you want to login',
+      'Cancel',
+      ()=> {
+        console.log('login success');
+        navigator.navigate('welcome');
+      }
+      );
   }
 
   const nativeCalendarHandler = async () => {
@@ -44,7 +53,7 @@ export const TestScreen = () => {
           gradient={["#FFA67A", "#FF6065"]}
           gradientShadow={"#C65252"}
           primary
-          onPress={()=> nativeScanner()}
+          onPress={()=> biometricAuthentication()}
         />
 
         <Button
