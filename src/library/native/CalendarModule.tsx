@@ -13,6 +13,8 @@ interface NativeModulesInterface {
         promiseEvent(name: string): Promise<any>
         callbackEvent(name: string, callback: (error: any,fullName: string) => void): void;
         showMessage(message: string): void;
+
+        scanner(callback: () => void): void;
     };
   }
 

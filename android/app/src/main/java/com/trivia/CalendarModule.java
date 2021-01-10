@@ -9,10 +9,15 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.Map;
 import java.util.HashMap;
 
+import android.content.DialogInterface;
 import android.hardware.biometrics.BiometricPrompt;
+import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
+import android.os.Build;
 import android.os.CancellationSignal;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 public class CalendarModule extends ReactContextBaseJavaModule {
 
@@ -27,6 +32,40 @@ public class CalendarModule extends ReactContextBaseJavaModule {
 
     //@ReactMethod(isBlockingSynchronousMethod = true)
     //not recommended for debugging
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    @ReactMethod
+    public void scanner(Callback callback) {
+        new BiometricPrompt.Builder(getReactApplicationContext())
+                .setTitle("title")
+                .setSubtitle("subtitle")
+                .setDescription("description")
+                .setNegativeButton("negativeButtonText", getReactApplicationContext().getMainExecutor(), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // callback;
+                    }
+                })
+                .build()
+                .authenticate(
+                        new CancellationSignal(),
+                        getReactApplicationContext().getMainExecutor(),
+                        new AuthenticationCallback() {
+                            @Override
+                            public void onAuthenticationError(int errorCode, CharSequence errString) {
+                                super.onAuthenticationError(errorCode, errString);
+                                showMessage((String) errString);
+                            }
+
+                            @Override
+                            public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                                super.onAuthenticationSucceeded(result);
+                                showMessage("Login Success");
+                                callback.invoke();
+                            }
+                        });
+    }
+
     @ReactMethod
     public void createCalendarEvent(String name, String location, Promise promise) {
         Log.d("CalendarModule", "Create event called with name: " + name

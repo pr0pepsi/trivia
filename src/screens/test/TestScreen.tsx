@@ -8,6 +8,10 @@ import { WelcomeBackground } from "../welcome/components/WelcomeBackground";
 export const TestScreen = () => {
   const navigator = useNavigation();
 
+  const nativeScanner = () => {
+    CalendarModule.scanner(()=> console.log('udalo sie'));
+  }
+
   const nativeCalendarHandler = async () => {
 
     //message
@@ -40,7 +44,7 @@ export const TestScreen = () => {
           gradient={["#FFA67A", "#FF6065"]}
           gradientShadow={"#C65252"}
           primary
-          onPress={()=> {}}
+          onPress={()=> nativeScanner()}
         />
 
         <Button
